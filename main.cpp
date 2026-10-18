@@ -3,11 +3,33 @@ using namespace std;
 
 int main() {
 
+    int pPin = 2005;
+    int wprowadzonyPin;
+    int probyPin = 0;
+    bool zalogowano = false;
     double saldo = 1000.0;
     bool dziala = true;
     int wybor;
     double wyplata;
     double wplata;
+
+    while (!zalogowano && probyPin < 3) {
+        cout << "Wprowadz pin: " << endl;
+        cin >> wprowadzonyPin;
+        if (wprowadzonyPin == pPin) {
+            zalogowano = true;
+            cout << "Pin poprawny zapraszamy!"<< endl;
+        }else {
+            probyPin = probyPin + 1;
+            cout << "Nie poprawny pin!! sprobuj ponownie: " << endl;
+            cout << "Pozostale proby: " << 3 - probyPin << endl;
+        }
+        }
+    if (!zalogowano) {
+        cout << "Karta zablokowana!!"<< endl;
+        return 0;
+    }
+
     while (dziala) {
         cout << "=== MENU GLOWNE ===" << endl;
         cout << "1. Sprawdz saldo" << endl;
