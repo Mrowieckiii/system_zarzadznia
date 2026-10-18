@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 int main() {
@@ -12,6 +15,8 @@ int main() {
     int wybor;
     double wyplata;
     double wplata;
+    vector<string> historia;
+
 
     while (!zalogowano && probyPin < 3) {
         cout << "Wprowadz pin: " << endl;
@@ -35,6 +40,8 @@ int main() {
         cout << "1. Sprawdz saldo" << endl;
         cout << "2. Wplac pieniadze" << endl;
         cout << "3. Wyplac pieniadze" << endl;
+        cout << "4.Historia Tranzakcji"<< endl;
+        cout << "5.Zmiana pinu"<<endl;
         cout << "0. Wyjscie" << endl;
         cout << "Wybierz opcje: ";
         cin >> wybor;
@@ -43,25 +50,42 @@ int main() {
             case 1:
                 cout << "saldo wynosi: "<< saldo << endl;
                 break;
-            case 2:
-
+            case 2: {
                 cout << "podaj kwote ktora chcesz wplacic: " << endl;
                 cin >> wplata;
                 saldo += wplata;
+                ostringstream stream;
+                stream << fixed << setprecision(2) << wplata;
+                historia.push_back("wplata : " + stream.str() + "zl");
                 cout << " Aktualna kwota: " << saldo << endl;
                 break;
-            case 3:
+            }
+            case 3: {
                 cout << "Ile chcesz wyplacic?: " << endl;
                 cin >> wyplata;
+                ostringstream streamWyplata;
+                streamWyplata << fixed << setprecision(2) << wyplata;
 
                 if (wyplata > saldo) {
                     cout << "Brak takiej ilosci pieniedzy na konice!! aktualny stan gotowki: " << saldo << endl;
                     cout << "Sprobuj ponownie";
                 }else {
                     saldo -= wyplata;
+                    historia.push_back("wyplata: " + streamWyplata.str() + " zl");
                     cout <<"Aktualne saldo wynosi: " << saldo << endl;
                 }
                 break;
+            }
+            case 4:
+                if (historia.empty()) {
+                    cout << "Brak tranzakcji zapisanych w historii!"<<endl;
+                }else {
+                    for(string wpis : historia ) {
+                        cout << wpis << endl;
+                    }
+                }
+                break;
+
             case 0:
             dziala = false;
                 break;
