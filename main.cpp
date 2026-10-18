@@ -85,6 +85,28 @@ int main() {
                     }
                 }
                 break;
+            case 5: {
+
+                cout << "Podaj stary pin: " << endl;
+                int staryPin, nowyPin, powtorzonyPin;
+                cin >> staryPin;
+                if (staryPin != pPin) {
+                    cout << "Blad! poprzedni pin jest inny!!"<< endl;
+                }else {
+                    cout << "podaj nowy pin: " << endl;
+                    cin >> nowyPin;
+                    cout << "powtorz pin: " << endl;
+                    cin >> powtorzonyPin;
+                    if (nowyPin == powtorzonyPin) {
+                        pPin = nowyPin;
+                        cout<< "Nadano nowy pin!!"<< endl;
+                    }else {
+                        cout<<"Podane piny nie sa takie same!!" << endl;
+                    }
+
+                }
+            break;
+            }
 
             case 0:
             dziala = false;
